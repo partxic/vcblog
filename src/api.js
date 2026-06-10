@@ -35,6 +35,9 @@ api.get('/status', (req, res) => {
 import site from './site.js'
 api.use('/site', site)
 
+import page from './page.js'
+api.use('/page', page)
+
 import { createServer, get } from 'node:http'
 import { httpServerHandler } from 'cloudflare:node'
 const server = createServer(app)
