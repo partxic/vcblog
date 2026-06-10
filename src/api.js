@@ -38,6 +38,9 @@ api.use('/site', site)
 import page from './page.js'
 api.use('/page', page)
 
+import post from './post.js'
+api.use('/post', post)
+
 import { createServer, get } from 'node:http'
 import { httpServerHandler } from 'cloudflare:node'
 const server = createServer(app)
