@@ -1,0 +1,16 @@
+CREATE TABLE
+    IF NOT EXISTS tmp (id INTEGER PRIMARY KEY AUTOINCREMENT);
+
+DROP TABLE tmp;
+
+DROP TABLE IF EXISTS storage;
+
+DELETE FROM sqlite_sequence;
+
+CREATE TABLE
+    storage (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        type TEXT NOT NULL DEFAULT 'post',
+        title TEXT NOT NULL,
+        content TEXT NOT NULL DEFAULT ''
+    );
