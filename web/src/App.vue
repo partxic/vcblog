@@ -24,6 +24,7 @@ onMounted(async () => {
     <BackendValidator v-model="backendOk" />
     <SiteInfoFetcher v-if="backendOk" v-model="siteInfoFetched" />
     <Layout v-if="backendOk && siteInfoFetched && routerReady">
+        <template #main><router-view /></template>
         <template #aside><Aside /></template>
         <template #footer><Footer /></template>
     </Layout>

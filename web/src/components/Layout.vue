@@ -21,7 +21,9 @@ const switcherIcon = computed(() => (showAside.value ? Close : Operation))
                     <slot name="aside"></slot>
                 </div>
             </el-aside>
-            <el-main></el-main>
+            <el-main>
+                <slot name="main"></slot>
+            </el-main>
         </el-container>
         <el-footer class="flex-center">
             <slot name="footer"></slot>
