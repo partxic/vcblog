@@ -9,5 +9,18 @@
     },
     "build": {
         "command": "npm install && cd web && npm install && npm run build"
-    }
+    },
+    "kv_namespaces": [
+        {
+            "binding": "config",
+            "id": "5fa938af21594d05b2675ba2aac4ab54"
+        }
+    ],
+    "d1_databases": [
+        {
+            "binding": "storage",
+            "database_name": "vcblog-storage",
+            "database_id": "4510bf1e-bece-497a-aac2-ae553529ecb0"
+        }
+    ]
 }
