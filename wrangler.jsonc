@@ -13,14 +13,16 @@
     "kv_namespaces": [
         {
             "binding": "config",
-            "id": "5fa938af21594d05b2675ba2aac4ab54"
+            "id": "5fa938af21594d05b2675ba2aac4ab54",
+            "remote": true
         }
     ],
     "d1_databases": [
         {
             "binding": "storage",
             "database_name": "vcblog-storage",
-            "database_id": "4510bf1e-bece-497a-aac2-ae553529ecb0"
+            "database_id": "4510bf1e-bece-497a-aac2-ae553529ecb0",
+            "remote": true
         }
     ]
 }

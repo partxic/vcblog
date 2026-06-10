@@ -32,6 +32,9 @@ api.get('/status', (req, res) => {
     return res.status(200).send('后端正常')
 })
 
+import site from './site.js'
+api.use('/site', site)
+
 import { createServer, get } from 'node:http'
 import { httpServerHandler } from 'cloudflare:node'
 const server = createServer(app)
