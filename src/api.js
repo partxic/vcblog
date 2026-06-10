@@ -22,9 +22,13 @@ app.use('/api', api)
 import { getenv } from './cfenv.js'
 const env = getenv()
 
-api.get('/ping', (req, res) => {
-    console.log('worker env will be here:', env)
-    return res.status(200).send('pong')
+api.use((req, res, next) => {
+    if (typeof env.config === 'undefined') return res.status(500).send('KV 配置错误')
+    if (typeof env.storage === 'undefined') return res.status(500).send('D1 配置错误')
+})
+
+api.get('/status', (req, res) => {
+    return res.status(200).send('后端正常')
 })
 
 import { createServer, get } from 'node:http'
