@@ -25,6 +25,7 @@ const env = getenv()
 api.use((req, res, next) => {
     if (typeof env.config === 'undefined') return res.status(500).send('KV 配置错误')
     if (typeof env.storage === 'undefined') return res.status(500).send('D1 配置错误')
+    return next()
 })
 
 api.get('/status', (req, res) => {
