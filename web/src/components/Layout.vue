@@ -16,7 +16,11 @@ const switcherIcon = computed(() => (showAside.value ? Close : Operation))
         <el-header class="flex-center">{{ siteStore.siteInfo.title }}</el-header>
         <el-container>
             <el-button v-if="isSmallWidth" class="switcher" :aside-open="showAside" :icon="switcherIcon" @click="showAside = !showAside" text />
-            <el-aside :in-small-width="isSmallWidth" :is-open="showAside"></el-aside>
+            <el-aside :in-small-width="isSmallWidth" :is-open="showAside">
+                <div class="flex-center">
+                    <slot name="aside"></slot>
+                </div>
+            </el-aside>
             <el-main></el-main>
         </el-container>
         <el-footer class="flex-center">

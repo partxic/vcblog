@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 import BackendValidator from '@/components/BackendValidator.vue'
 import SiteInfoFetcher from '@/components/SiteInfoFetcher.vue'
 import Layout from '@/components/Layout.vue'
+import Aside from '@/components/Aside.vue'
 import Footer from '@/components/Footer.vue'
 
 const backendOk = ref(false)
@@ -23,6 +24,7 @@ onMounted(async () => {
     <BackendValidator v-model="backendOk" />
     <SiteInfoFetcher v-if="backendOk" v-model="siteInfoFetched" />
     <Layout v-if="backendOk && siteInfoFetched && routerReady">
+        <template #aside><Aside /></template>
         <template #footer><Footer /></template>
     </Layout>
 </template>
