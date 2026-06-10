@@ -16,11 +16,20 @@ onMounted(async () => {
 </script>
 
 <template>
-    <router-link to="/">首页</router-link>
-    <router-link v-for="page in pages" :to="`/page/${page.id}`">{{ page.title }}</router-link>
+    <div class="container">
+        <router-link to="/">首页</router-link>
+        <router-link v-for="page in pages" :to="`/page/${page.id}`">{{ page.title }}</router-link>
+    </div>
 </template>
 
 <style scoped>
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+}
+
 a {
     color: blue;
 }
