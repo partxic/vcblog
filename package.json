@@ -1,5 +1,5 @@
 {
-    "name": "express-vue-starter",
+    "name": "vcblog",
     "type": "module",
     "scripts": {
         "deploy": "wrangler deploy",
