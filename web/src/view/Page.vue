@@ -4,16 +4,12 @@ import { onMounted, ref } from 'vue'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import useSiteStore from '@/stores/useSiteStore'
-
-import { MdPreview, MdCatalog } from 'md-editor-v3'
+import { MdPreview } from 'md-editor-v3'
 import 'md-editor-v3/lib/preview.css'
 
 const siteStore = useSiteStore()
 const route = useRoute()
 const pageContent = ref('')
-
-const id = 'markdown-viewer'
-const scrollElement = document.documentElement
 
 onMounted(async () => {
     const { id } = route.params
@@ -29,8 +25,11 @@ onMounted(async () => {
 </script>
 
 <template>
-    <MdPreview :id="id" :modelValue="pageContent" />
-    <MdCatalog :editorId="id" :scrollElement="scrollElement" />
+    <MdPreview id="markdown-viewer" :modelValue="pageContent" />
 </template>
 
-<style scoped></style>
+<style scoped>
+#markdown-viewer {
+    background: transparent;
+}
+</style>
