@@ -17,7 +17,7 @@ const switcherIcon = computed(() => (showAside.value ? Close : Operation))
         <el-container>
             <el-button v-if="isSmallWidth" class="switcher" :aside-open="showAside" :icon="switcherIcon" @click="showAside = !showAside" text />
             <el-aside :in-small-width="isSmallWidth" :is-open="showAside">
-                <div class="flex-center">
+                <div class="aside-container">
                     <slot name="aside"></slot>
                 </div>
             </el-aside>
@@ -50,6 +50,12 @@ const switcherIcon = computed(() => (showAside.value ? Close : Operation))
 .el-aside {
     padding: 20px 0;
     width: 200px;
+}
+
+.aside-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .switcher {

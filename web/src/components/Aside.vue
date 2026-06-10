@@ -23,6 +23,5 @@ onMounted(async () => {
 <style scoped>
 a {
     color: blue;
-    display: block;
 }
 </style>
