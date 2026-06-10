@@ -16,7 +16,7 @@ const id = 'markdown-viewer'
 const scrollElement = document.documentElement
 
 onMounted(async () => {
-    const { id } = route.query
+    const { id } = route.params
 
     try {
         const res = await axios.get(`/api/page/content?id=${id}`)
