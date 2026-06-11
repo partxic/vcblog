@@ -3,7 +3,7 @@ const post = express.Router()
 
 import storage from './storage.js'
 import { table } from './storage.js'
-import { count, and, eq, desc, sql } from 'drizzle-orm'
+import { count, and, eq, desc, sql, like, or } from 'drizzle-orm'
 
 import { getenv } from './cfenv.js'
 const env = getenv()
@@ -87,6 +87,33 @@ post.get('/content', async (req, res) => {
     }
 
     return res.status(200).json(result[0])
+})
+
+post.get('/search', async (req, res) => {
+    const { keyword } = req.query
+    if (typeof keyword === 'undefined' || keyword === '') {
+        return res.status(400).send('请求错误')
+    }
+
+    const config = env.config
+    const postPerPage = parseInt(await config.get('postPerPage'), 10)
+    if (isNaN(postPerPage)) {
+        return res.status(500).send('数据错误')
+    }
+
+    const sqlKeyword = `%${keyword}%`
+    const result = await storage
+        .select({
+            id: table.id,
+            title: table.title,
+            preview: sql`substr(${table.content}, 1, 200)`.mapWith(String).as('preview')
+        })
+        .from(table)
+        .where(and(eq(table.type, 'post'), or(like(table.title, sqlKeyword), like(table.content, sqlKeyword))))
+        .orderBy(desc(table.id))
+        .limit(postPerPage)
+
+    return res.status(200).json(result)
 })
 
 export default post
