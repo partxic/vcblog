@@ -24,6 +24,22 @@ export default createRouter({
         {
             path: '/search',
             component: () => import('@/view/Search.vue')
+        },
+        {
+            path: '/admin',
+            component: () => import('@/view/Admin.vue'),
+            children: [
+                {
+                    path: 'login',
+                    name: 'login',
+                    component: () => import('@/view/admin/Login.vue')
+                },
+                {
+                    path: 'dashboard',
+                    name: 'dashboard',
+                    component: () => import('@/view/admin/Dashboard.vue')
+                }
+            ]
         }
     ]
 })
