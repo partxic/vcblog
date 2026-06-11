@@ -25,6 +25,24 @@ const configDiff = computed(() => {
     return diff
 })
 
+const saveConfig = async () => {
+    const keysToUpdate = [...configDiff.value]
+
+    for (const key of keysToUpdate) {
+        try {
+            loading.value = true
+            const value = currentConfig.value[key]
+            const res = await axios.post('/api/site/update', { key, value })
+            ElMessage.success(res.data)
+            previousConfig.value[key] = value
+        } catch (error) {
+            ElMessage.error(error.response.data)
+        } finally {
+            loading.value = false
+        }
+    }
+}
+
 const refresh = async () => {
     try {
         loading.value = true
@@ -44,6 +62,7 @@ onMounted(refresh)
 <template>
     <div class="top">
         <el-button type="primary" :loading="loading" @click="refresh">刷新</el-button>
+        <el-button type="primary" :loading="loading" @click="saveConfig">保存</el-button>
     </div>
     <el-form :model="currentConfig" label-width="auto" style="max-width: 600px">
         <el-form-item v-for="(_, key) in currentConfig" :label="key">
