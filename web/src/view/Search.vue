@@ -24,7 +24,7 @@ const search = async () => {
 </script>
 
 <template>
-    <div class="top">
+    <div class="top flex-align-center">
         <el-input class="flex-1" v-model="keyword" />
         <el-button type="primary" :loading="loading" @click="search">搜索</el-button>
     </div>
@@ -35,8 +35,6 @@ const search = async () => {
 
 <style scoped>
 .top {
-    display: flex;
-    align-items: center;
     column-gap: 5px;
 }
 

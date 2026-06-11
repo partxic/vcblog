@@ -23,6 +23,11 @@ a {
     justify-content: center;
 }
 
+.flex-align-center {
+    display: flex;
+    align-items: center;
+}
+
 .flex-1 {
     flex: 1;
 }

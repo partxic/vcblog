@@ -60,7 +60,7 @@ onMounted(refresh)
 </script>
 
 <template>
-    <div class="top">
+    <div class="flex-align-center">
         <el-button type="primary" :loading="loading" @click="refresh">刷新</el-button>
         <el-button type="primary" :loading="loading" @click="saveConfig">保存</el-button>
     </div>
@@ -73,11 +73,6 @@ onMounted(refresh)
 </template>
 
 <style scoped>
-.top {
-    display: flex;
-    align-items: center;
-}
-
 .el-form {
     margin: 10px 0;
 }
