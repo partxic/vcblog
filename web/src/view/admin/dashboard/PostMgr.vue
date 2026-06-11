@@ -20,18 +20,39 @@ const post = {
     })
 }
 
-const newPost = () => {}
+const openEditor = async idx => {
+    const pageID = posts.value[idx].id
+    post.id.value = pageID
 
-const openEditor = async idx => {}
+    try {
+        loading.value = true
+        const res = await axios.get(`/api/post/content?id=${pageID}`)
+        Object.assign(post.data, res.data)
+        showEditor.value = true
+    } catch (error) {
+        ElMessage.error(error.response.data)
+    } finally {
+        loading.value = false
+    }
+}
+
+const newPost = () => {
+    post.id.value = -1
+    Object.assign(post.data, {
+        title: '',
+        content: ''
+    })
+    showEditor.value = true
+}
 
 const deletePost = async idx => {}
+
+const savePost = async () => {}
 
 const closeEditor = async () => {
     showEditor.value = false
     await refresh()
 }
-
-const savePost = async () => {}
 
 const refresh = async () => {
     try {
@@ -51,7 +72,6 @@ const refresh = async () => {
         posts.value = res.data
     } catch (error) {
         ElMessage.error(error.response.data)
-        return
     } finally {
         loading.value = false
     }
