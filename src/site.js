@@ -12,6 +12,15 @@ site.get('/info', async (req, res) => {
     return res.status(200).json(data)
 })
 
+import { SitemapStream, streamToPromise } from 'sitemap'
+import { Readable } from 'stream'
+
+site.get('/map', async (req, res) => {})
+
+import { Feed } from 'feed'
+
+site.get('/feed', async (req, res) => {})
+
 import { needAuth } from './auth.js'
 
 site.get('/config', needAuth, async (req, res) => {
