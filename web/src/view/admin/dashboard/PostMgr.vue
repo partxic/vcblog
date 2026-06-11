@@ -21,12 +21,12 @@ const post = {
 }
 
 const openEditor = async idx => {
-    const pageID = posts.value[idx].id
-    post.id.value = pageID
+    const postID = posts.value[idx].id
+    post.id.value = postID
 
     try {
         loading.value = true
-        const res = await axios.get(`/api/post/content?id=${pageID}`)
+        const res = await axios.get(`/api/post/content?id=${postID}`)
         Object.assign(post.data, res.data)
         showEditor.value = true
     } catch (error) {
@@ -45,9 +45,38 @@ const newPost = () => {
     showEditor.value = true
 }
 
-const deletePost = async idx => {}
+const deletePost = async idx => {
+    const postID = posts.value[idx].id
 
-const savePost = async () => {}
+    try {
+        loading.value = true
+        const res = await axios.delete(`/api/post/delete?id=${postID}`)
+        ElMessage.success(res.data)
+        await refresh()
+    } catch (error) {
+        ElMessage.error(error.response.data)
+    } finally {
+        loading.value = false
+    }
+}
+
+const savePost = async () => {
+    const isNewPost = post.id.value === -1
+
+    try {
+        loading.value = true
+
+        const urlPath = isNewPost ? `new` : `update?id=${post.id.value}`
+        const res = await axios.post(`/api/post/${urlPath}`, post.data)
+
+        ElMessage.success(isNewPost ? '创建成功' : res.data)
+        if (isNewPost) post.id.value = res.data.id
+    } catch (error) {
+        ElMessage.error(error.response.data)
+    } finally {
+        loading.value = false
+    }
+}
 
 const closeEditor = async () => {
     showEditor.value = false
