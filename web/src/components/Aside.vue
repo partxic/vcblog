@@ -31,6 +31,6 @@ onMounted(async () => {
 }
 
 a {
-    color: blue;
+    font-size: 1.2em;
 }
 </style>
