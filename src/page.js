@@ -81,4 +81,14 @@ page.delete('/delete', needAuth, async (req, res) => {
     return res.status(200).send('操作成功')
 })
 
+page.post('/new', needAuth, async (req, res) => {
+    const { title, content } = req.body
+    if (typeof title !== 'string' || title === '' || typeof content !== 'string') {
+        return res.status(400).send('请求错误')
+    }
+
+    const [id] = await storage.insert(table).values({ title, content, type: 'page' }).returning({ id: table.id })
+    return res.status(200).json(id)
+})
+
 export default page

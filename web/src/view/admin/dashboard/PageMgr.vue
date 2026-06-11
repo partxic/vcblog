@@ -34,6 +34,15 @@ const openEditor = async idx => {
     }
 }
 
+const newPage = async () => {
+    page.id.value = -1
+    Object.assign(page.data, {
+        title: '',
+        content: ''
+    })
+    showEditor.value = true
+}
+
 const deletePage = async idx => {
     const pageID = pages.value[idx].id
 
@@ -50,10 +59,16 @@ const deletePage = async idx => {
 }
 
 const savePage = async () => {
+    const isNewPage = page.id.value === -1
+
     try {
         loading.value = true
-        const res = await axios.post(`/api/page/update?id=${page.id.value}`, page.data)
-        ElMessage.success(res.data)
+
+        const urlPath = isNewPage ? `new` : `update?id=${page.id.value}`
+        const res = await axios.post(`/api/page/${urlPath}`, page.data)
+
+        ElMessage.success(isNewPage ? '创建成功' : res.data)
+        if (isNewPage) page.id.value = res.data.id
     } catch (error) {
         ElMessage.error(error.response.data)
     } finally {
@@ -84,6 +99,7 @@ onMounted(refresh)
 <template>
     <div class="flex-align-center">
         <el-button type="primary" :loading="loading" @click="refresh">刷新</el-button>
+        <el-button type="primary" :loading="loading" @click="newPage">新增</el-button>
     </div>
     <el-table v-loading="loading" :data="pages">
         <el-table-column fixed="left" prop="id" label="序号" width="100" />
