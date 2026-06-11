@@ -29,7 +29,7 @@ post.get('/count', async (req, res) => {
 })
 
 post.get('/list', async (req, res) => {
-    const { page } = req.query
+    const { page, preview } = req.query
     if (typeof page !== 'string' || page === '') {
         return res.status(400).send('请求错误')
     }
@@ -48,11 +48,14 @@ post.get('/list', async (req, res) => {
     const offset = (pageNum - 1) * postPerPage
     const limit = postPerPage
 
+    const noPreview = preview === 'no'
     const result = await storage
         .select({
             id: table.id,
             title: table.title,
-            preview: sql`substr(${table.content}, 1, 200)`.mapWith(String).as('preview')
+            ...(!noPreview && {
+                preview: sql`substr(${table.content}, 1, 200)`.mapWith(String)
+            })
         })
         .from(table)
         .where(eq(table.type, 'post'))
