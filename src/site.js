@@ -2,7 +2,6 @@ import express from 'express'
 const site = express.Router()
 
 import { getenv } from './cfenv.js'
-
 const env = getenv()
 
 site.get('/info', async (req, res) => {
@@ -41,9 +40,46 @@ site.get('/map', async (req, res) => {
     res.send(xmlBuffer.toString())
 })
 
+import { desc, eq, sql } from 'drizzle-orm'
 import { Feed } from 'feed'
 
-site.get('/feed', async (req, res) => {})
+site.get('/feed', async (req, res) => {
+    const hostname = `${req.protocol}://${req.host}`
+
+    const feed = new Feed({
+        title: await config.get('title'),
+        link: hostname
+    })
+
+    const config = env.config
+    const postPerPage = parseInt(await config.get('postPerPage'), 10)
+    if (isNaN(postPerPage)) {
+        return res.status(500).send('数据错误')
+    }
+
+    const posts = await storage
+        .select({
+            id: table.id,
+            title: table.title,
+            preview: sql`substr(${table.content}, 1, 200)`.mapWith(String)
+        })
+        .from(table)
+        .where(eq(table.type, 'post'))
+        .orderBy(desc(table.id))
+        .limit(postPerPage)
+
+    posts.forEach(post => {
+        feed.addItem({
+            title: post.title,
+            link: `${hostname}/post/${post.id}`,
+            id: post.id,
+            description: post.preview
+        })
+    })
+
+    res.type('application/xml')
+    res.send(feed.rss2())
+})
 
 import { needAuth } from './auth.js'
 
