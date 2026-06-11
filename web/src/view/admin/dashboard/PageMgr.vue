@@ -34,7 +34,20 @@ const openEditor = async idx => {
     }
 }
 
-const deletePage = async idx => {}
+const deletePage = async idx => {
+    const pageID = pages.value[idx].id
+
+    try {
+        loading.value = true
+        const res = await axios.delete(`/api/page/delete?id=${pageID}`)
+        ElMessage.success(res.data)
+        await refresh()
+    } catch (error) {
+        ElMessage.error(error.response.data)
+    } finally {
+        loading.value = false
+    }
+}
 
 const savePage = async () => {
     try {
