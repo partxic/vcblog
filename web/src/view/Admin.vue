@@ -1,7 +1,7 @@
-<script setup></script>
+<script setup>
+document.title = '正在跳转...'
+</script>
 
-<template>
-    <span>正在跳转...</span>
-</template>
+<template></template>
 
 <style scoped></style>
