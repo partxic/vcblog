@@ -119,4 +119,51 @@ post.get('/search', async (req, res) => {
     return res.status(200).json(result)
 })
 
+import { needAuth } from './auth.js'
+
+post.post('/update', needAuth, async (req, res) => {
+    const { id } = req.query
+    if (typeof id === 'undefined' || id === '') {
+        return res.status(400).send('请求错误')
+    }
+
+    const idNum = parseInt(id, 10)
+    if (isNaN(idNum)) {
+        return res.status(400).send('参数错误')
+    }
+
+    const { title, content } = req.body
+    if (typeof title !== 'string' || title === '' || typeof content !== 'string') {
+        return res.status(400).send('请求错误')
+    }
+
+    await storage.update(table).set({ title, content }).where(eq(table.id, idNum))
+    return res.status(200).send('更新成功')
+})
+
+post.delete('/delete', needAuth, async (req, res) => {
+    const { id } = req.query
+    if (typeof id === 'undefined' || id === '') {
+        return res.status(400).send('请求错误')
+    }
+
+    const idNum = parseInt(id, 10)
+    if (isNaN(idNum)) {
+        return res.status(400).send('参数错误')
+    }
+
+    await storage.delete(table).where(eq(table.id, idNum))
+    return res.status(200).send('删除成功')
+})
+
+post.post('/new', needAuth, async (req, res) => {
+    const { title, content } = req.body
+    if (typeof title !== 'string' || title === '' || typeof content !== 'string') {
+        return res.status(400).send('请求错误')
+    }
+
+    const [id] = await storage.insert(table).values({ title, content, type: 'post' }).returning({ id: table.id })
+    return res.status(200).json(id)
+})
+
 export default post
