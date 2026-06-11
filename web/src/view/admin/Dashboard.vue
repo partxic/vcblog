@@ -2,10 +2,16 @@
 document.title = '正在跳转...'
 
 import { useRoute, useRouter } from 'vue-router'
-import { onMounted, watch } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 
 const route = useRoute()
 const router = useRouter()
+
+const tabs = computed(() => {
+    const allRoutes = router.getRoutes()
+    const dashboardRoute = allRoutes.find(route => route.name === 'dashboard')
+    return dashboardRoute ? dashboardRoute.children || [] : []
+})
 
 const redirect = () => {
     if (!route.name || route.name === 'dashboard') router.push({ name: 'config-edit' })
@@ -22,6 +28,11 @@ watch(
 onMounted(redirect)
 </script>
 
-<template></template>
+<template>
+    <el-tabs :model-value="route.name" @tab-click="(tab, _) => router.push({ name: tab.paneName })">
+        <el-tab-pane v-for="tab in tabs" :label="tab.meta.tab" :name="tab.name" />
+    </el-tabs>
+    <router-view />
+</template>
 
 <style scoped></style>
