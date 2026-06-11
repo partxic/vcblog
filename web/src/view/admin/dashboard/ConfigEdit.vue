@@ -66,7 +66,7 @@ onMounted(refresh)
     </div>
     <el-form :model="currentConfig" label-width="auto" style="max-width: 600px">
         <el-form-item v-for="(_, key) in currentConfig" :label="key">
-            <el-input v-model="currentConfig[key]" placeholder="空" :type="key.startsWith('extra') ? 'textarea' : 'text'" clearable />
+            <el-input v-model="currentConfig[key]" placeholder="空" :type="key.startsWith('extra') ? 'textarea' : 'text'" />
         </el-form-item>
     </el-form>
     <span>待保存的更改: {{ configDiff.join(', ') || '无' }}</span>
