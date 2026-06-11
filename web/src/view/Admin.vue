@@ -31,6 +31,8 @@ watch(
 onMounted(redirect)
 </script>
 
-<template></template>
+<template>
+    <router-view />
+</template>
 
 <style scoped></style>
