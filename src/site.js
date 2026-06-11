@@ -12,10 +12,34 @@ site.get('/info', async (req, res) => {
     return res.status(200).json(data)
 })
 
+import storage from './storage.js'
+import { table } from './storage.js'
+
 import { SitemapStream, streamToPromise } from 'sitemap'
 import { Readable } from 'stream'
 
-site.get('/map', async (req, res) => {})
+site.get('/map', async (req, res) => {
+    const hostname = `${req.protocol}://${req.host}`
+
+    const result = await storage
+        .select({
+            id: table.id,
+            type: table.type
+        })
+        .from(table)
+
+    const links = result.map(item => ({
+        url: `/${item.type}/${item.id}`,
+        changefreq: 'daily',
+        priority: 0.8
+    }))
+
+    const stream = new SitemapStream({ hostname: hostname })
+    const xmlBuffer = await streamToPromise(Readable.from(links).pipe(stream))
+
+    res.type('application/xml')
+    res.send(xmlBuffer.toString())
+})
 
 import { Feed } from 'feed'
 
