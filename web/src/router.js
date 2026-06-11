@@ -9,11 +9,17 @@ export default createRouter({
         },
         {
             path: '/page/:id',
+            meta: {
+                type: 'page'
+            },
             component: () => import('@/view/Page.vue')
         },
         {
             path: '/post/:id',
-            component: () => import('@/view/Post.vue')
+            meta: {
+                type: 'post'
+            },
+            component: () => import('@/view/Page.vue')
         }
     ]
 })

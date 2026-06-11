@@ -13,9 +13,10 @@ const pageContent = ref('')
 
 onMounted(async () => {
     const { id } = route.params
+    const { type } = route.meta
 
     try {
-        const res = await axios.get(`/api/page/content?id=${id}`)
+        const res = await axios.get(`/api/${type}/content?id=${id}`)
         pageContent.value = res.data.content
         document.title = `${res.data.title} | ${siteStore.siteInfo.title}`
     } catch (error) {
