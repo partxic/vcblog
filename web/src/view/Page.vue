@@ -32,6 +32,5 @@ onMounted(async () => {
 <style scoped>
 #markdown-viewer {
     background: transparent;
-    margin-top: -20px;
 }
 </style>
