@@ -66,4 +66,19 @@ page.post('/update', needAuth, async (req, res) => {
     return res.status(200).send('操作成功')
 })
 
+page.delete('/delete', needAuth, async (req, res) => {
+    const { id } = req.query
+    if (typeof id === 'undefined' || id === '') {
+        return res.status(400).send('请求错误')
+    }
+
+    const idNum = parseInt(id, 10)
+    if (isNaN(idNum)) {
+        return res.status(400).send('参数错误')
+    }
+
+    await storage.delete(table).where(eq(table.id, idNum))
+    return res.status(200).send('操作成功')
+})
+
 export default page
