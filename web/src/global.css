@@ -23,6 +23,11 @@ a {
     justify-content: center;
 }
 
+.column-flex {
+    display: flex;
+    flex-direction: column;
+}
+
 .flex-align-center {
     display: flex;
     align-items: center;

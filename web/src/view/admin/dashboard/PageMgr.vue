@@ -48,6 +48,11 @@ const savePage = async () => {
     }
 }
 
+const closeEditor = async () => {
+    showEditor.value = false
+    await refresh()
+}
+
 const refresh = async () => {
     try {
         loading.value = true
@@ -78,7 +83,7 @@ onMounted(refresh)
         </el-table-column>
         <template #empty>没有数据</template>
     </el-table>
-    <MarkdownEditor :show="showEditor" :loading="loading" :data="page.data" @close="showEditor = false" @save="savePage" />
+    <MarkdownEditor v-if="showEditor" :show="showEditor" :loading="loading" :data="page.data" @close="closeEditor" @save="savePage" />
 </template>
 
 <style scoped>

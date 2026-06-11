@@ -16,7 +16,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="container flex-align-center">
+    <div class="container flex-align-center column-flex">
         <router-link to="/">首页</router-link>
         <router-link to="/search">搜索</router-link>
         <router-link v-for="page in pages" :to="`/page/${page.id}`">{{ page.title }}</router-link>
@@ -26,7 +26,6 @@ onMounted(async () => {
 
 <style scoped>
 .container {
-    flex-direction: column;
     row-gap: 10px;
 }
 
