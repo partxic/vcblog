@@ -40,6 +40,7 @@ onMounted(async () => {
             <router-link class="post-title" :to="`/post/${post.id}`">{{ post.title }}</router-link>
             <span class="post-preview">{{ post.preview }}</span>
         </div>
+        <el-pagination class="flex-center" layout="prev, pager, next" v-model:current-page="currentPage" :page-count="totalPage" />
     </div>
 </template>
 
@@ -58,5 +59,9 @@ onMounted(async () => {
     display: block;
     color: #444;
     margin: 5px 0;
+}
+
+.el-pagination * {
+    background: transparent !important;
 }
 </style>
