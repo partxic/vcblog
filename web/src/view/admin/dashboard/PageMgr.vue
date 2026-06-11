@@ -16,6 +16,10 @@ const page = {
     })
 }
 
+const openEditor = async idx => {}
+
+const deletePage = async idx => {}
+
 const refresh = async () => {
     try {
         loading.value = true
@@ -35,6 +39,21 @@ onMounted(refresh)
     <div class="flex-align-center">
         <el-button type="primary" :loading="loading" @click="refresh">刷新</el-button>
     </div>
+    <el-table :data="pages">
+        <el-table-column fixed="left" prop="id" label="序号" width="100" />
+        <el-table-column prop="title" label="标题" width="1000" />
+        <el-table-column fixed="right" label="操作" width="120">
+            <template #default="line">
+                <el-button type="primary" @click="openEditor(line.$index)" link>编辑</el-button>
+                <el-button type="danger" @click="deletePage(line.$index)" link>删除</el-button>
+            </template>
+        </el-table-column>
+        <template #empty>没有数据</template>
+    </el-table>
 </template>
 
-<style scoped></style>
+<style scoped>
+.el-table {
+    margin-top: 10px;
+}
+</style>
