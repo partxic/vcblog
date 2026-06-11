@@ -18,6 +18,7 @@ onMounted(async () => {
 <template>
     <div class="container">
         <router-link to="/">首页</router-link>
+        <router-link to="/search">搜索</router-link>
         <router-link v-for="page in pages" :to="`/page/${page.id}`">{{ page.title }}</router-link>
     </div>
 </template>
