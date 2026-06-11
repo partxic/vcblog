@@ -23,8 +23,8 @@ import { getenv } from './cfenv.js'
 const env = getenv()
 
 api.use((req, res, next) => {
-    if (typeof env.config === 'undefined') return res.status(500).send('KV 配置错误')
-    if (typeof env.storage === 'undefined') return res.status(500).send('D1 配置错误')
+    if (typeof env.config === 'undefined') return res.status(500).send('KV 绑定错误')
+    if (typeof env.storage === 'undefined') return res.status(500).send('D1 绑定错误')
     return next()
 })
 
