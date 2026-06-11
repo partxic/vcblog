@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export default defineStore('site', () => {
     const siteInfo = reactive({
-        title: '<title>',
+        title: '',
         extraCSS: '',
         extraJS: ''
     })
