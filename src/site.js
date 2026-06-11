@@ -45,13 +45,13 @@ import { Feed } from 'feed'
 
 site.get('/feed', async (req, res) => {
     const hostname = `${req.protocol}://${req.host}`
+    const config = env.config
 
     const feed = new Feed({
         title: await config.get('title'),
         link: hostname
     })
 
-    const config = env.config
     const postPerPage = parseInt(await config.get('postPerPage'), 10)
     if (isNaN(postPerPage)) {
         return res.status(500).send('数据错误')
