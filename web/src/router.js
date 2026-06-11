@@ -10,6 +10,10 @@ export default createRouter({
         {
             path: '/page/:id',
             component: () => import('@/view/Page.vue')
+        },
+        {
+            path: '/post/:id',
+            component: () => import('@/view/Post.vue')
         }
     ]
 })

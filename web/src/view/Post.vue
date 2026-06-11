@@ -1,22 +1,22 @@
 <script setup>
+import { ref, onMounted } from 'vue'
+import useSiteStore from '@/stores/useSiteStore'
 import { useRoute } from 'vue-router'
-import { onMounted, ref } from 'vue'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import useSiteStore from '@/stores/useSiteStore'
 import { MdPreview } from 'md-editor-v3'
 import 'md-editor-v3/lib/preview.css'
 
 const siteStore = useSiteStore()
 const route = useRoute()
-const pageContent = ref('')
+const postContent = ref('')
 
 onMounted(async () => {
     const { id } = route.params
 
     try {
-        const res = await axios.get(`/api/page/content?id=${id}`)
-        pageContent.value = res.data.content
+        const res = await axios.get(`/api/post/content?id=${id}`)
+        postContent.value = res.data.content
         document.title = `${res.data.title} | ${siteStore.siteInfo.title}`
     } catch (error) {
         ElMessage.error(error.response.data)
@@ -25,7 +25,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <MdPreview id="markdown-viewer" :modelValue="pageContent" />
+    <MdPreview id="markdown-viewer" :modelValue="postContent" />
 </template>
 
 <style scoped>
