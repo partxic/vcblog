@@ -3,6 +3,7 @@ import setTitle from '@/setTitle.js'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { ref, onMounted, computed } from 'vue'
+import { Refresh, Finished } from '@element-plus/icons-vue'
 
 setTitle('配置编辑器')
 const loading = ref(false)
@@ -61,8 +62,8 @@ onMounted(refresh)
 
 <template>
     <div class="flex-align-center">
-        <el-button type="primary" :loading="loading" @click="refresh">刷新</el-button>
-        <el-button type="primary" :loading="loading" @click="saveConfig">保存</el-button>
+        <el-button type="primary" :loading="loading" @click="refresh" :icon="Refresh" />
+        <el-button type="primary" :loading="loading" @click="saveConfig" :icon="Finished" />
     </div>
     <el-form :model="currentConfig" label-width="auto" style="max-width: 600px">
         <el-form-item v-for="(_, key) in currentConfig" :label="key">

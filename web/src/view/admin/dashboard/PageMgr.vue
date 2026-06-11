@@ -4,6 +4,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { ref, onMounted, reactive } from 'vue'
 import MarkdownEditor from '@/components/MarkdownEditor.vue'
+import { Refresh, Plus } from '@element-plus/icons-vue'
 
 setTitle('页面管理器')
 const loading = ref(false)
@@ -98,8 +99,8 @@ onMounted(refresh)
 
 <template>
     <div class="flex-align-center">
-        <el-button type="primary" :loading="loading" @click="refresh">刷新</el-button>
-        <el-button type="primary" :loading="loading" @click="newPage">新增</el-button>
+        <el-button type="primary" :loading="loading" @click="refresh" :icon="Refresh" />
+        <el-button type="primary" :loading="loading" @click="newPage" :icon="Plus" />
     </div>
     <el-table v-loading="loading" :data="pages">
         <el-table-column fixed="left" prop="id" label="序号" width="100" />
