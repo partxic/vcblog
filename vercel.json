@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "https://vcblog.partxi.workers.dev/$1"
+        }
+    ]
+}
