@@ -22,4 +22,15 @@ site.get('/config', needAuth, async (req, res) => {
     return res.status(200).json(data)
 })
 
+site.post('/update', needAuth, async (req, res) => {
+    const { key, value } = req.body
+    if (typeof key !== 'string' || key === '' || typeof value !== 'string') {
+        return res.status(400).send('请求错误')
+    }
+
+    const config = env.config
+    await config.put(key, value)
+    return res.status(200).send('操作成功')
+})
+
 export default site
