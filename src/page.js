@@ -44,4 +44,26 @@ page.get('/content', async (req, res) => {
     return res.status(200).json(result[0])
 })
 
+import { needAuth } from './auth.js'
+
+page.post('/update', needAuth, async (req, res) => {
+    const { id } = req.query
+    if (typeof id === 'undefined' || id === '') {
+        return res.status(400).send('请求错误')
+    }
+
+    const idNum = parseInt(id, 10)
+    if (isNaN(idNum)) {
+        return res.status(400).send('参数错误')
+    }
+
+    const { title, content } = req.body
+    if (typeof title !== 'string' || title === '' || typeof content !== 'string') {
+        return res.status(400).send('请求错误')
+    }
+
+    await storage.update(table).set({ title, content }).where(eq(table.id, idNum))
+    return res.status(200).send('操作成功')
+})
+
 export default page
