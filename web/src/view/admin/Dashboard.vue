@@ -54,4 +54,12 @@ onMounted(redirect)
     <router-view />
 </template>
 
-<style scoped></style>
+<style scoped>
+.el-tabs :deep(.el-tabs__nav) {
+    margin-top: -10px;
+}
+
+.el-tabs :deep(.el-tabs__item) {
+    font-size: 1.2em;
+}
+</style>
