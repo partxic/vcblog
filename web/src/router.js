@@ -20,6 +20,10 @@ export default createRouter({
                 type: 'post'
             },
             component: () => import('@/view/Page.vue')
+        },
+        {
+            path: '/search',
+            component: () => import('@/view/Search.vue')
         }
     ]
 })

@@ -2,10 +2,9 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { ref, onMounted, watch } from 'vue'
-import useSiteStore from '@/stores/useSiteStore'
 import PostCard from '@/components/PostCard.vue'
+import setTitle from '@/setTitle.js'
 
-const siteStore = useSiteStore()
 const totalPage = ref(0)
 const currentPage = ref(1)
 const posts = ref([])
@@ -13,7 +12,7 @@ const posts = ref([])
 watch(
     () => currentPage.value,
     async pageNum => {
-        document.title = `第 ${pageNum} 页 | ${siteStore.siteInfo.title}`
+        setTitle(`第 ${pageNum} 页`)
 
         try {
             const res = await axios.get(`/api/post/list?page=${pageNum}`)

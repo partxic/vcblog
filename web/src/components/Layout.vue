@@ -1,7 +1,7 @@
 <script setup>
 import { useWindowSize } from '@vueuse/core'
 import { computed, ref } from 'vue'
-import useSiteStore from '@/stores/useSiteStore'
+import useSiteStore from '@/stores/useSiteStore.js'
 import { Close, Operation } from '@element-plus/icons-vue'
 
 const siteStore = useSiteStore()

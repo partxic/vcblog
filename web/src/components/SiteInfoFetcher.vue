@@ -1,7 +1,7 @@
 <script setup>
 import { ref, defineModel, onMounted, computed } from 'vue'
 import { ElMessage } from 'element-plus'
-import useSiteStore from '@/stores/useSiteStore'
+import useSiteStore from '@/stores/useSiteStore.js'
 
 const siteStore = useSiteStore()
 const isOk = defineModel({ type: Boolean, required: true })

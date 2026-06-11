@@ -1,5 +1,5 @@
 <script setup>
-import useSiteStore from '@/stores/useSiteStore'
+import useSiteStore from '@/stores/useSiteStore.js'
 
 const siteStore = useSiteStore()
 
