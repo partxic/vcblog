@@ -76,7 +76,6 @@ onMounted(refresh)
 .top {
     display: flex;
     align-items: center;
-    column-gap: 5px;
 }
 
 .el-form {
