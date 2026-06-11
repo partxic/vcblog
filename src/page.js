@@ -63,7 +63,7 @@ page.post('/update', needAuth, async (req, res) => {
     }
 
     await storage.update(table).set({ title, content }).where(eq(table.id, idNum))
-    return res.status(200).send('操作成功')
+    return res.status(200).send('更新成功')
 })
 
 page.delete('/delete', needAuth, async (req, res) => {
@@ -78,7 +78,7 @@ page.delete('/delete', needAuth, async (req, res) => {
     }
 
     await storage.delete(table).where(eq(table.id, idNum))
-    return res.status(200).send('操作成功')
+    return res.status(200).send('删除成功')
 })
 
 page.post('/new', needAuth, async (req, res) => {
