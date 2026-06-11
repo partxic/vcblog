@@ -30,7 +30,7 @@ const fetchCount = async () => {
 
 const fetchPosts = async () => {
     try {
-        const res = await axios.get(`/api/post/list?page=${currentPage.value}`)
+        const res = await axios.get(`/api/post/list?page=${currentPage.value}&preview=no`)
         posts.value = res.data
     } catch (error) {
         ElMessage.error(error.response.data)
