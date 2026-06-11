@@ -25,7 +25,7 @@ const search = async () => {
 
 <template>
     <div class="top">
-        <el-input v-model="keyword" />
+        <el-input class="flex-1" v-model="keyword" />
         <el-button type="primary" :loading="loading" @click="search">搜索</el-button>
     </div>
     <div v-if="result.length !== 0" class="main">
