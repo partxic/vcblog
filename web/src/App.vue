@@ -1,4 +1,6 @@
 <script setup>
+document.title = '加载中...'
+
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import BackendValidator from '@/components/BackendValidator.vue'
