@@ -83,7 +83,7 @@ onMounted(refresh)
         </el-table-column>
         <template #empty>没有数据</template>
     </el-table>
-    <MarkdownEditor v-if="showEditor" :show="showEditor" :loading="loading" :data="page.data" @close="closeEditor" @save="savePage" />
+    <MarkdownEditor :show="showEditor" :loading="loading" :data="page.data" @close="closeEditor" @save="savePage" />
 </template>
 
 <style scoped>

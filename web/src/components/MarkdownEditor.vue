@@ -27,7 +27,7 @@ const handleClose = done => {
 </script>
 
 <template>
-    <el-dialog class="column-flex" :model-value="props.show" title="Markdown 编辑器" :before-close="handleClose" body-class="flex-1 column-flex" destroy-on-close fullscreen>
+    <el-dialog class="column-flex" :model-value="props.show" title="Markdown 编辑器" :before-close="handleClose" body-class="flex-1 column-flex" fullscreen>
         <div class="top flex-align-center">
             <el-text size="large">标题</el-text>
             <el-input class="flex-1" v-model="props.data.title" />
