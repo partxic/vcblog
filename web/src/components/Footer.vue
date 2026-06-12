@@ -15,7 +15,7 @@ document.head.appendChild(script)
 <template>
     <span>© {{ new Date().getFullYear() }}.</span>
     &nbsp;
-    <span>Powered by <a href="https://github.com/partxic/vcblog" target="_blank">VCBlog</a>.</span>
+    <span>Powered by <a href="https://github.com/partxic/vcblog" target="_blank" rel="noopener noreferrer">VCBlog</a>.</span>
 </template>
 
 <style scoped>
