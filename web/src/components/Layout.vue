@@ -60,7 +60,7 @@ const switcherIcon = computed(() => (showAside.value ? Close : Operation))
     border: transparent;
     border-radius: 0px 24px 24px 0px;
     transition: none;
-    z-index: 114;
+    z-index: 20000;
 }
 
 .switcher :deep(.el-icon) {
@@ -81,7 +81,7 @@ const switcherIcon = computed(() => (showAside.value ? Close : Operation))
     bottom: 0;
     background: #eee;
     box-shadow: 0 0 10px 0;
-    z-index: 514;
+    z-index: 20000;
 }
 
 .el-aside[is-open='false'] {
