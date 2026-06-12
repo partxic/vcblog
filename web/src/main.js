@@ -26,7 +26,6 @@ config({
             return item
         })
     },
-
     markdownItPlugins(plugins) {
         return [
             ...plugins,
