@@ -10,6 +10,7 @@ const pinia = createPinia()
 app.use(pinia)
 
 import { config } from 'md-editor-v3'
+import LinkAttr from 'markdown-it-link-attributes'
 config({
     codeMirrorExtensions(extensions) {
         return extensions.map(item => {
@@ -22,9 +23,27 @@ config({
                     }
                 }
             }
-
             return item
         })
+    },
+
+    markdownItPlugins(plugins) {
+        return [
+            ...plugins,
+            {
+                type: 'linkAttr',
+                plugin: LinkAttr,
+                options: {
+                    matcher(href) {
+                        return !href.startsWith('#')
+                    },
+                    attrs: {
+                        target: '_blank',
+                        rel: 'noopener noreferrer'
+                    }
+                }
+            }
+        ]
     }
 })
 
