@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import setTitle from '@/setTitle.js'
@@ -10,7 +10,7 @@ import 'md-editor-v3/lib/preview.css'
 const route = useRoute()
 const pageContent = ref('')
 
-onMounted(async () => {
+const fetchContent = async () => {
     const { id } = route.params
     const { type } = route.meta
 
@@ -21,7 +21,16 @@ onMounted(async () => {
     } catch (error) {
         ElMessage.error(error.response.data)
     }
-})
+}
+
+watch(
+    () => route.meta.type,
+    type => {
+        if (type === 'page' || type === 'post') fetchContent()
+    }
+)
+
+onMounted(fetchContent)
 </script>
 
 <template>
