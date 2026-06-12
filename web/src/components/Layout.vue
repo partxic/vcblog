@@ -51,7 +51,7 @@ const switcherIcon = computed(() => (showAside.value ? Close : Operation))
 }
 
 .switcher {
-    position: absolute;
+    position: fixed;
     top: 15px;
     width: 70px;
     height: 50px;
@@ -76,7 +76,7 @@ const switcherIcon = computed(() => (showAside.value ? Close : Operation))
 }
 
 .el-aside[in-small-width='true'] {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     background: #eee;
