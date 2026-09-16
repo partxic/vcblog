@@ -34,7 +34,7 @@ onMounted(fetchContent)
 </script>
 
 <template>
-    <MdPreview id="markdown-viewer" :modelValue="pageContent" />
+    <MdPreview id="markdown-viewer" :modelValue="pageContent" :codeFoldable="false" />
 </template>
 
 <style scoped>

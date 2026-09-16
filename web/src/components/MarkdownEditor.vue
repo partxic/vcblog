@@ -33,7 +33,7 @@ const handleClose = done => {
             <el-input class="flex-1" v-model="props.data.title" />
             <el-button type="primary" :loading="props.loading" @click="emits('save')">保存</el-button>
         </div>
-        <MdEditor class="flex-1" v-model="props.data.content" />
+        <MdEditor class="flex-1" v-model="props.data.content" :codeFoldable="false" />
     </el-dialog>
 </template>
 
